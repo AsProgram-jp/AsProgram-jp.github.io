@@ -35,9 +35,19 @@ let currentWaveform = 'sine'; // 'sine', 'square', 'triangle', 'sawtooth'
 let waveformOrder = ['sine', 'square', 'triangle', 'sawtooth'];
 
 function setup() {
+	console.log('Setup started');
 	createCanvas(windowWidth, windowHeight);
+	console.log('Canvas created');
 	textAlign(CENTER, CENTER);
 	rectMode(CENTER);
+	
+	// 音の初期化（setup完了後）
+	setTimeout(() => {
+		if (typeof getAudioContext !== 'undefined') {
+			getAudioContext().resume();
+		}
+	}, 100);
+	
 	// 鍵盤エリア生成（画面下部）
 	let keyW = width / NUM_KEYS;
 	let keyH = height * 0.12;

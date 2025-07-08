@@ -1,13 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My p5.js Project</title>
+    <title>Rhythm Game</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/addons/p5.sound.min.js"></script>
+    <style>
+        body { margin: 0; padding: 0; }
+    </style>
 </head>
 <body>
     <script src="sketch.js"></script>
+    <script>
+        // ユーザーインタラクション後に音を初期化
+        function initAudio() {
+            // 音の初期化
+            if (typeof getAudioContext !== 'undefined') {
+                getAudioContext().resume();
+            }
+        }
+        
+        // ページ読み込み後にイベントリスナーを追加
+        document.addEventListener('DOMContentLoaded', function() {
+            // クリック、タッチ、キー入力で音を初期化
+            document.addEventListener('click', initAudio, { once: true });
+            document.addEventListener('touchstart', initAudio, { once: true });
+            document.addEventListener('keydown', initAudio, { once: true });
+        });
+    </script>
 </body>
 </html>
